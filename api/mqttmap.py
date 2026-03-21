@@ -2777,7 +2777,10 @@ _X1_JSON = {
         "gp": {NAME: "grid_power_signed"},  # 0 W
         "g2bp": {NAME: "grid_to_battery_power"},  # 0 W
         "g2lp": {NAME: "grid_to_home_power"},  # 0 W
-        "lp": {NAME: "home_demand"},  # 650 W
+        "lp": {NAME: "home_load"},  # 650 W
+        "d2bp": {NAME: "generator_to_battery_power"},
+        "d2lp": {NAME: "generator_to_home_power"},
+        "dp": {NAME: "generator_power"},
         # daily energies in Wh?
         "pe": {NAME: "pv_yield_today", FACTOR: 0.001},  # 28629.02 Wh
         "p2le": {NAME: "pv_consumption_today", FACTOR: 0.001},  # 6348.36 Wh
@@ -2789,7 +2792,12 @@ _X1_JSON = {
         "b2ge": {NAME: "grid_discharged_today", FACTOR: 0.001},  # 40.09 Wh
         "g2be": {NAME: "grid_charged_today", FACTOR: 0.001},  # 0 Wh
         "g2le": {NAME: "grid_consumption_today", FACTOR: 0.001},  # 54 Wh
+        "fge": {NAME: "grid_export_today", FACTOR: 0.001},
+        "tge": {NAME: "grid_import_today", FACTOR: 0.001},
         "le": {NAME: "home_consumption_today", FACTOR: 0.001},  # 13241.26 Wh
+        "de": {NAME: "generator_energy_today", FACTOR: 0.001},
+        "d2be": {NAME: "generator_charged_today", FACTOR: 0.001},
+        "d2le": {NAME: "generator_consumed_today", FACTOR: 0.001},
         # aggregated energies in Wh?
         "pae": {NAME: "pv_yield", FACTOR: 0.001},  # 5143662.5 Wh
         "bac": {NAME: "charged_energy", FACTOR: 0.001},  # 2675350.25 Wh
@@ -3667,19 +3675,19 @@ SOLIXMQTTMAP: Final[dict] = {
             "a2": {NAME: "device_sn"},
             "a6": {NAME: "sw_version", "values": 4},
             "a7": {NAME: "sw_controller", "values": 4},
-            "b1": {NAME: "grid_to_home_power_l1"},
-            "b2": {NAME: "grid_to_home_power_l2"},
-            "b3": {NAME: "grid_to_home_power"},
-            "b4": {NAME: "grid_to_home_current_l1?"},
-            "b5": {NAME: "voltage_l1n?"},
-            "b6": {NAME: "grid_to_home_current_l2?"},
-            "b7": {NAME: "voltage_l2n?"},
-            "b8": {NAME: "ct_gain_factor?"},
-            "b9": {NAME: "voltage_l1l2?"},
-            "ba": {NAME: "home_to_pps_power_l1"},
-            "bb": {NAME: "home_to_pps_power_l2"},
-            "bc": {NAME: "home_to_pps_current_l1?"},
-            "bd": {NAME: "home_to_pps_current_l2?"},
+            "b1": {NAME: "grid_power_signed_l1"}, # negative = Export
+            "b2": {NAME: "grid_power_signed_l2"}, # negative = Export
+            "b3": {NAME: "grid_power_signed"}, # negative = Export
+            "b4": {NAME: "current_l1"},
+            "b5": {NAME: "voltage_l1"},
+            "b6": {NAME: "current_l2"},
+            "b7": {NAME: "voltage_l2"},
+            "b8": {NAME: "power_factor"},
+            "b9": {NAME: "voltage_l1l2"},
+            "ba": {NAME: "system_output_power_signed_l1", FACTOR: -1},
+            "bb": {NAME: "system_output_power_signed_l2", FACTOR: -1},
+            "bc": {NAME: "system_output_current_l1"},
+            "bd": {NAME: "system_output_current_l2"},
             "be": {NAME: "voltage_l1l2_alt?"},
             "fe": {NAME: "msg_timestamp"},
         },
