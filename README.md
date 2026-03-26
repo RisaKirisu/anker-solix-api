@@ -28,33 +28,22 @@ The library is currently supported on
 
 The dependencies of this project are `cryptography`, `aiohttp`, `aiofiles` and `paho-mqtt` for the Api library modules.
 The tools utilizing the common.py module optionally require `python-dotenv` to support definition of credentials via local `.env` file that can be utilized for loading environment variables at runtime only.
-You can either install the requirements manually (e.g. via a package manager) or use [`poetry`](https://github.com/python-poetry/poetry).
+You can either install the requirements manually (e.g. via a package manager) or use [`uv`](https://docs.astral.sh/uv/).
 
-## Poetry
+## uv
 
-**Step 1:** Install `poetry` following the [official documentation](https://python-poetry.org/docs/#installation) or via your favorite package manager,
-for example:
-```shell
-sudo pip install poetry
-```
-or
-```shell
-sudo pacman -S python-poetry
-```
+**Step 1:** Install `uv` following the [official documentation](https://docs.astral.sh/uv/getting-started/installation/) or via your favorite package manager.
 
-> [!IMPORTANT]
-> [Poetry 2.0.0](https://github.com/python-poetry/poetry/releases/tag/2.0.0) or later is required for full support of the pyproject.toml file, see issue [#208](https://github.com/thomluther/anker-solix-api/issues/208).
-
-**Step 2:** Install dependencies with `poetry`. In the root of this repository run:
+**Step 2:** Install dependencies in the root of this repository:
 
 ```shell
-poetry install
+uv sync
 ```
 
 **Step 3:** Run programs in this repository with:
 
 ```shell
-poetry run python [...].py
+uv run python [...].py
 ```
 
 ## Manually
@@ -269,7 +258,7 @@ Please follow the [guidelines in this comment](https://github.com/thomluther/ank
 ## test_api.py
 
 ```shell
-poetry run python ./test_api.py
+uv run python ./test_api.py
 ```
 
 Example exec module that can be used to explore and test AnkerSolixApi methods or direct endpoint requests with parameters. You can modify this module as required. Optionally you can create your own test file called `client.py` starting with the usage example above. The `client.py` file is not indexed and added to gitignore, so your local changes are not tracked for git updates/commits.
@@ -293,7 +282,7 @@ Those variables will only be loaded at runtime when importing the common module.
 ## export_system.py
 
 ```shell
-poetry run python ./export_system.py
+uv run python ./export_system.py
 ```
 
 Example exec module to use the Anker Api for export of defined system data and device details.
@@ -308,7 +297,7 @@ Optionally the AnkerSolixApi class can use the json files for debugging and test
 ## monitor.py
 
 ```shell
-poetry run python ./monitor.py
+uv run python ./monitor.py
 ```
 
 Example exec module to use the Anker Api for continuously querying and displaying important Anker power device parameters.
@@ -438,7 +427,7 @@ with mobile App data.
 ## mqtt_monitor.py
 
 ```shell
-poetry run python ./mqtt_monitor.py
+uv run python ./mqtt_monitor.py
 ```
 
 Example exec module to use the Anker Api to establish a client connection to the MQTT cloud server and subscribe to MQTT topics for receiving
@@ -525,7 +514,7 @@ python mqtt_monitor.py -dev 1234567890123456 -fd -dp cmd.device_timeout -sr
 ## energy_csv.py
 
 ```shell
-poetry run python ./energy_csv.py
+uv run python ./energy_csv.py
 ```
 
 Example exec module to use the Anker Api for export of daily Energy Data. This method will prompt for the Anker account details if not pre-set in the header.
